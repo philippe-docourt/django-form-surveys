@@ -3,6 +3,8 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'djf_surveys/css/rating.css' %}"/>
+    <link href="{% static '/dist/jsoneditor.min.css' %}" media="all" rel="stylesheet">
+    <script src="{% static '/dist/jsoneditor.min.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -43,6 +45,7 @@
 
             <form method="post" class="mx-auto mt-12" id="sortable">
                 {% csrf_token %}
+                {{ form.media }}
                 {% for field in form %}
                     <div class="ui-state-default" id="{{ field|get_id_field }}">
                         <div class="flex -space-x-4 hover:space-x-1 py-1">
@@ -76,7 +79,7 @@
                                 {% if field.field.widget.input_type == 'radio' or field.field.widget.input_type == 'checkbox' %}
                                     {{ field }}
                                 {% else %}
-                                    {{ field|addclass:'w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm' }}
+                                    {{ field|addclass:'w-full text-sm border-gray-500 rounded-lg shadow-sm' }}
                                 {% endif %}
                             </div>
                             <p class="text-xs text-gray-400 mt-2">{{ field.help_text }}</p>

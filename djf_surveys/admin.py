@@ -1,10 +1,13 @@
 from django.contrib import admin
+
+from .admins.forms import QuestionForm
 from .models import Survey, Question, Answer, UserAnswer
 
 
 class AdminQuestion(admin.ModelAdmin):
     list_display = ('survey', 'label', 'type_field', 'help_text', 'required')
     search_fields = ('survey', )
+    form = QuestionForm
 
 
 class AdminAnswer(admin.ModelAdmin):

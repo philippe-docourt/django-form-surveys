@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_jsonform',
+    'django_json_widget',
     'djf_surveys',
     'demo',
 ]

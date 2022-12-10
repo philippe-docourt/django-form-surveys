@@ -1,19 +1,22 @@
+import itertools
+import json
 import random, string
 from collections import namedtuple
 
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, gettext
 
 from djf_surveys import app_settings
 from djf_surveys.utils import create_star
 
 
 TYPE_FIELD = namedtuple(
-    'TYPE_FIELD', 'text number radio select multi_select text_area url email date rating'
-)._make(range(10))
+    'TYPE_FIELD', 'text number radio select multi_select text_area url email date rating time date_and_time color json'
+)._make(range(14))
 
 
 def generate_unique_slug(klass, field, id, identifier='slug'):
@@ -36,6 +39,7 @@ def generate_unique_slug(klass, field, id, identifier='slug'):
         numb += 1
         obj = klass.objects.filter(**mapping).first()
     return unique_slug
+
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -74,6 +78,12 @@ class Survey(BaseModel):
         verbose_name_plural = _("surveys")
 
 
+def get_json_schema_help_text():
+    doc_url = "https://django-jsonform.readthedocs.io/en/latest/schema.html"
+    doc_url_html = f'<a href="{doc_url}" target="_blank">{doc_url}</a>'
+    return mark_safe(gettext("If type of field is JSON, fill in the JSON schema (see %(doc_url)s).") % dict(doc_url=doc_url_html))
+
+
 class Question(BaseModel):
     TYPE_FIELD = [
         (TYPE_FIELD.text, _("Text")),
@@ -85,7 +95,11 @@ class Question(BaseModel):
         (TYPE_FIELD.url, _("URL")),
         (TYPE_FIELD.email, _("Email")),
         (TYPE_FIELD.date, _("Date")),
-        (TYPE_FIELD.rating, _("Rating"))
+        (TYPE_FIELD.time, _("Time")),
+        (TYPE_FIELD.date_and_time, _("Date and time")),
+        (TYPE_FIELD.rating, _("Rating")),
+        (TYPE_FIELD.color, _("Color")),
+        (TYPE_FIELD.json, _("JSON")),
     ]
 
     key = models.CharField(_("key"), max_length=225, unique=True, default="", blank=True,
@@ -98,13 +112,19 @@ class Question(BaseModel):
         blank=True, null=True,
         help_text=_("If type of field is radio, select, or multi select, fill in the options separated by commas. Ex: Male, Female.")
     )
+    schema = models.JSONField(
+        _("schema"),
+        blank=True, null=True,
+        encoder=DjangoJSONEncoder,
+        help_text=get_json_schema_help_text
+    )
     help_text = models.CharField(
         _("help text"),
         max_length=200, blank=True, null=True,
         help_text=_("You can add a help text in here.")
     )
     required = models.BooleanField(_("required"), default=True, help_text=_("If True, the user must provide an answer to this question."))
-    ordering = models.PositiveIntegerField(_("choices"), default=0, help_text=_("Defines the question order within the surveys."))
+    ordering = models.PositiveIntegerField(_("ordering"), default=0, help_text=_("Defines the question order within the surveys."))
 
     class Meta:
         verbose_name = _("question")
@@ -165,11 +185,40 @@ class Answer(BaseModel):
             return self.value.strip().replace("_", " ").capitalize()
         else:
             return self.value
-    
-    @property
-    def get_value_for_csv(self):
+
+    def get_keys_for_csv(self):
+        def getkeys(obj, stack):
+            for k, v in obj.items():
+                k2 = ([k] if k else []) + stack  # don't return empty keys
+                if v and isinstance(v, dict):
+                    for c in getkeys(v, k2):
+                        yield c
+                else:  # leaf
+                    yield k2
+        question_label = self.question.label
+        if self.question.type_field == TYPE_FIELD.json:
+            data = json.loads(self.value)
+            keys = [f"{question_label} - {k.capitalize()}" for k in itertools.chain.from_iterable(getkeys(data, []))]
+        else:
+            keys = [question_label]
+        return keys
+
+    def get_values_for_csv(self):
+        def getvalues(obj):
+            for v in obj.values():
+                if not v: continue
+                if isinstance(v, dict):
+                    for c in getvalues(v):
+                        yield c
+                else:  # leaf
+                    yield v if isinstance(v, list) else [v]
+
         if self.question.type_field == TYPE_FIELD.radio or self.question.type_field == TYPE_FIELD.select or\
                 self.question.type_field == TYPE_FIELD.multi_select:
-            return self.value.strip().replace("_", " ").capitalize()
+            values = [self.value.strip().replace("_", " ").capitalize()]
+        elif self.question.type_field == TYPE_FIELD.json:
+            data = json.loads(self.value)
+            values = list(itertools.chain.from_iterable(getvalues(data)))
         else:
-            return self.value.strip()
+            values = [self.value.strip()]
+        return values

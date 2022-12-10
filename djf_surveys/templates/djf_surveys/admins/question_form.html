@@ -2,14 +2,18 @@
 
 {% block extra_js %}
     <script>
-        var choicesVal = document.getElementById('id_type_field').value;
-        var elChoice = document.querySelector("#section_field_id_choices");
+        const fieldTypeElement = document.getElementById('id_type_field');
+        const fieldTypeValue = fieldTypeElement.value;
+        const elChoice = document.getElementById("section_field_id_choices");
+        const elSchema = document.getElementById("section_field_id_schema");
 
-        toggleChoices(choicesVal);
+        toggleChoices(fieldTypeValue);
+        toggleSchema(fieldTypeValue);
 
-        document.getElementById('id_type_field').addEventListener('change', function() {
+        fieldTypeElement.addEventListener('change', function() {
           console.log('You selected: ', this.value);
           toggleChoices(this.value);
+          toggleSchema(this.value);
         });
 
         function toggleChoices(value) {
@@ -17,6 +21,14 @@
               elChoice.hidden = false;
           } else {
               elChoice.hidden = true;
+          }
+        }
+
+        function toggleSchema(value) {
+            if (value == 13) {
+              elSchema.hidden = false;
+          } else {
+              elSchema.hidden = true;
           }
         }
     </script>

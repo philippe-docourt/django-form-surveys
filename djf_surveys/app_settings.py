@@ -6,9 +6,25 @@ SURVEY_MASTER_TEMPLATE = settings.SURVEY_MASTER_TEMPLATE if hasattr(settings,
 # profile photo path
 SURVEY_USER_PHOTO_PROFILE = settings.SURVEY_USER_PHOTO_PROFILE if hasattr(settings, 'SURVEY_USER_PHOTO_PROFILE') else ""
 
-# date input format
-DATE_INPUT_FORMAT = settings.DATE_INPUT_FORMAT if hasattr(settings, 'DATE_INPUT_FORMAT') else \
+# date and time input format
+DATE_INPUT_FORMATS = settings.DATE_INPUT_FORMATS if hasattr(settings, 'DATE_INPUT_FORMATS') else \
     ['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', '%d/%m/%y', '%d/%m/%Y']
+
+TIME_INPUT_FORMATS = settings.TIME_INPUT_FORMATS if hasattr(settings, 'TIME_INPUT_FORMATS') else \
+    [
+        '%H:%M:%S',  # '14:30:59'
+        '%H:%M',  # '14:30'
+    ]
+
+DATETIME_INPUT_FORMATS = settings.DATETIME_INPUT_FORMATS if hasattr(settings, 'DATETIME_INPUT_FORMATS') else \
+[
+    '%Y-%m-%d %H:%M:%S',     # '2006-10-25 14:30:59'
+    '%Y-%m-%d %H:%M',        # '2006-10-25 14:30'
+    '%m/%d/%Y %H:%M:%S',     # '10/25/2006 14:30:59'
+    '%m/%d/%Y %H:%M',        # '10/25/2006 14:30'
+    '%m/%d/%y %H:%M:%S',     # '10/25/06 14:30:59'
+    '%m/%d/%y %H:%M',        # '10/25/06 14:30'
+]
 
 # validators
 field_validators = {

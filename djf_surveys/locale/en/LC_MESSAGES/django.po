@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 01:06+0700\n"
+"POT-Creation-Date: 2022-12-04 00:31+0700\n"
 "PO-Revision-Date: 2022-11-06 19:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,146 +18,167 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: admins/views.py:32
+#: admins/views.py:33
 msgid "Add New Survey"
 msgstr "Add New Survey"
 
-#: admins/views.py:39 admins/views.py:113 views.py:50
+#: admins/views.py:40 admins/views.py:114 views.py:51
 #, python-format
 msgid "%(page_action_name)s succeeded."
 msgstr "%(page_action_name)s succeeded."
 
-#: admins/views.py:53
+#: admins/views.py:54
 msgid "Edit Survey"
 msgstr "Edit Survey"
 
-#: admins/views.py:90
+#: admins/views.py:91
 #, python-format
 msgid "Survey %(name)s succesfully deleted."
 msgstr "Survey %(name)s succesfully deleted."
 
-#: admins/views.py:100 admins/views.py:128
+#: admins/views.py:101 admins/views.py:129
 msgid "Add Question"
 msgstr "Add Question"
 
-#: admins/views.py:153
+#: admins/views.py:154
 #, python-format
 msgid "Question %(name)s succesfully deleted."
 msgstr "Question %(name)s succesfully deleted."
 
-#: admins/views.py:168
+#: admins/views.py:169
 msgid "Update ordering of questions succeeded."
 msgstr "Update ordering of questions succeeded."
 
-#: admins/views.py:211 templates/djf_surveys/admins/summary.html:34
+#: admins/views.py:212 templates/djf_surveys/admins/summary.html:16
 msgid "Summary"
 msgstr "Summary"
 
-#: models.py:49
+#: models.py:50
 msgid "name"
 msgstr "name"
 
-#: models.py:50
+#: models.py:51
 msgid "description"
 msgstr "description"
 
-#: models.py:51
+#: models.py:52
 msgid "slug"
 msgstr "slug"
 
-#: models.py:52
+#: models.py:53
 msgid "editable"
 msgstr "editable"
 
-#: models.py:52
+#: models.py:53
 msgid "If False, user can't edit record."
 msgstr "If False, user can't edit record."
 
-#: models.py:53
+#: models.py:54
 msgid "deletable"
 msgstr "deletable"
 
-#: models.py:53
+#: models.py:54
 msgid "If False, user can't delete record."
 msgstr "If False, user can't delete record."
 
-#: models.py:54
+#: models.py:55
 msgid "mutiple submissions"
 msgstr "mutiple submissions"
 
-#: models.py:54
+#: models.py:55
 msgid "If True, user can resubmit."
 msgstr "If True, user can resubmit."
 
-#: models.py:55
+#: models.py:56
 msgid "private response"
 msgstr "private response"
 
-#: models.py:55
+#: models.py:56
 msgid "If True, only admin and owner can access."
 msgstr "If True, only admin and owner can access."
 
-#: models.py:56
+#: models.py:57
 msgid "anonymous submission"
 msgstr "anonymous submission"
 
-#: models.py:56
+#: models.py:57
 msgid "If True, user without authentatication can submit."
 msgstr "If True, user without authentatication can submit."
 
-#: models.py:59 models.py:73 models.py:93 models.py:127
+#: models.py:60 models.py:74 models.py:103 models.py:142
 msgid "survey"
 msgstr "survey"
 
-#: models.py:60 models.py:74
+#: models.py:61 models.py:75
 msgid "surveys"
 msgstr "surveys"
 
-#: models.py:79
+#: models.py:80
+#, python-format
+msgid "If type of field is JSON, fill in the JSON schema (see %(doc_url)s)."
+msgstr ""
+
+#: models.py:85
 msgid "Text"
 msgstr "Text"
 
-#: models.py:80
+#: models.py:86
 msgid "Number"
 msgstr "Number"
 
-#: models.py:81
+#: models.py:87
 msgid "Radio"
 msgstr "Radio"
 
-#: models.py:82
+#: models.py:88
 msgid "Select"
 msgstr "Select"
 
-#: models.py:83
+#: models.py:89
 msgid "Multi Select"
 msgstr "Multi Select"
 
-#: models.py:84
+#: models.py:90
 msgid "Text Area"
 msgstr "Text Area"
 
-#: models.py:85
+#: models.py:91
 msgid "URL"
 msgstr "URL"
 
-#: models.py:86
+#: models.py:92
 msgid "Email"
 msgstr "Email"
 
-#: models.py:87
+#: models.py:93
 msgid "Date"
 msgstr "Date"
 
-#: models.py:88
+#: models.py:94
+msgid "Time"
+msgstr ""
+
+#: models.py:95
+msgid "Date and time"
+msgstr ""
+
+#: models.py:96
 msgid "Rating"
 msgstr "Rating"
 
-#: models.py:91
+#: models.py:97
+msgid "Color"
+msgstr ""
+
+#: models.py:98
+msgid "JSON"
+msgstr ""
+
+#: models.py:101
 msgid "key"
 msgstr "key"
 
-#: models.py:92
+#: models.py:102
 msgid ""
 "Unique key for this question, fill in the blank if you want to use for "
 "automatic generation."
@@ -165,23 +186,23 @@ msgstr ""
 "Unique key for this question, fill in the blank if you want to use for "
 "automatic generation."
 
-#: models.py:94
+#: models.py:104
 msgid "label"
 msgstr "label"
 
-#: models.py:94
+#: models.py:104
 msgid "Enter your question in here."
 msgstr "Enter your question in here."
 
-#: models.py:95
+#: models.py:105
 msgid "type of input field"
 msgstr "type of input field"
 
-#: models.py:97 models.py:107
+#: models.py:107
 msgid "choices"
 msgstr "choices"
 
-#: models.py:99
+#: models.py:109
 msgid ""
 "If type of field is radio, select, or multi select, fill in the options "
 "separated by commas. Ex: Male, Female."
@@ -189,64 +210,71 @@ msgstr ""
 "If type of field is radio, select, or multi select, fill in the options "
 "separated by commas. Ex: Male, Female."
 
-#: models.py:102
+#: models.py:112
+msgid "schema"
+msgstr ""
+
+#: models.py:117
 msgid "help text"
 msgstr "help text"
 
-#: models.py:104
+#: models.py:119
 msgid "You can add a help text in here."
 msgstr "You can add a help text in here."
 
-#: models.py:106
+#: models.py:121
 msgid "required"
 msgstr "required"
 
-#: models.py:106
+#: models.py:121
 msgid "If True, the user must provide an answer to this question."
 msgstr "If True, the user must provide an answer to this question."
 
-#: models.py:107
+#: models.py:122
+msgid "ordering"
+msgstr ""
+
+#: models.py:122
 msgid "Defines the question order within the surveys."
 msgstr "Defines the question order within the surveys."
 
-#: models.py:110 models.py:145
+#: models.py:125 models.py:160
 msgid "question"
 msgstr "question"
 
-#: models.py:111
+#: models.py:126
 msgid "questions"
 msgstr "questions"
 
-#: models.py:128
+#: models.py:143
 msgid "user"
 msgstr "user"
 
-#: models.py:131 models.py:147
+#: models.py:146 models.py:162
 msgid "user answer"
 msgstr "user answer"
 
-#: models.py:132
+#: models.py:147
 msgid "user answers"
 msgstr "user answers"
 
-#: models.py:146
+#: models.py:161
 msgid "value"
 msgstr "value"
 
-#: models.py:146
+#: models.py:161
 msgid "The value of the answer given by the user."
 msgstr "The value of the answer given by the user."
 
-#: models.py:150
+#: models.py:165
 msgid "answer"
 msgstr "answer"
 
-#: models.py:151
+#: models.py:166
 msgid "answers"
 msgstr "answers"
 
 #: summary.py:243
-#| msgid "Summary"
 msgid "No summary"
 msgstr "No summary"
 
@@ -255,7 +283,7 @@ msgstr "No summary"
 msgid "Summary is available only for input type: %(input_types)s"
 msgstr "Summary is available only for input type: %(input_types)s"
 
-#: templates/djf_surveys/admins/form.html:31 templates/djf_surveys/form.html:56
+#: templates/djf_surveys/admins/form.html:31 templates/djf_surveys/form.html:38
 msgid "Submit"
 msgstr "Submit"
 
@@ -263,7 +291,7 @@ msgstr "Submit"
 msgid "Create a survey"
 msgstr "Create a survey"
 
-#: templates/djf_surveys/answer_list.html:32
+#: templates/djf_surveys/answer_list.html:14
 msgid "Result"
 msgstr "Result"
 
@@ -333,38 +361,38 @@ msgstr "Value cannot be greater than 5."
 msgid "Value cannot be less than 1."
 msgstr "Value cannot be less than 1."
 
-#: views.py:53
+#: views.py:54
 msgid "Something went wrong."
 msgstr "Something went wrong."
 
-#: views.py:61
+#: views.py:62
 msgid "Add Survey"
 msgstr "Add Survey"
 
-#: views.py:67
+#: views.py:68
 msgid "Sorry, you must be logged in to fill out the survey."
 msgstr "Sorry, you must be logged in to fill out the survey."
 
-#: views.py:73
+#: views.py:74
 msgid "You have submitted out this survey."
 msgstr "You have submitted out this survey."
 
-#: views.py:104
+#: views.py:105
 msgid "You can't edit this survey. You don't have permission."
 msgstr "You can't edit this survey. You don't have permission."
 
-#: views.py:129
+#: views.py:130
 msgid "You can't delete this survey. You don't have permission."
 msgstr "You can't delete this survey. You don't have permission."
 
-#: views.py:136
+#: views.py:137
 msgid "Answer succesfully deleted."
 msgstr "Answer succesfully deleted."
 
-#: views.py:149 views.py:182
+#: views.py:150 views.py:183
 msgid "You can't access this page. You don't have permission."
 msgstr "You can't access this page. You don't have permission."
 
-#: views.py:168
+#: views.py:169
 msgid "Survey Result"
 msgstr "Survey Result"

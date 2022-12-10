@@ -1,12 +1,18 @@
+import json
 from typing import List, Tuple
 
 from django import forms
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.core.validators import MaxLengthValidator
+from django.utils.translation import gettext
+
+from django_jsonform.forms.fields import JSONFormField
+from django_jsonform.widgets import JSONFormWidget
 
 from djf_surveys.models import Answer, TYPE_FIELD, UserAnswer, Question
-from djf_surveys.widgets import CheckboxSelectMultipleSurvey, RadioSelectSurvey, DateSurvey, RatingSurvey
-from djf_surveys.app_settings import DATE_INPUT_FORMAT, SURVEY_FIELD_VALIDATORS
+from djf_surveys.widgets import CheckboxSelectMultipleSurvey, RadioSelectSurvey, DateSurvey, RatingSurvey, TimeSurvey, DateTimeSurvey, ColorSurvey
+from djf_surveys.app_settings import DATE_INPUT_FORMATS, SURVEY_FIELD_VALIDATORS, TIME_INPUT_FORMATS, DATETIME_INPUT_FORMATS
 from djf_surveys.validators import validate_rating
 
 
@@ -63,7 +69,17 @@ class BaseSurveyForm(forms.Form):
             elif question.type_field == TYPE_FIELD.date:
                 self.fields[field_name] = forms.DateField(
                     label=question.label, widget=DateSurvey(),
-                    input_formats=DATE_INPUT_FORMAT
+                    input_formats=DATE_INPUT_FORMATS
+                )
+            elif question.type_field == TYPE_FIELD.time:
+                self.fields[field_name] = forms.TimeField(
+                    label=question.label, widget=TimeSurvey(),
+                    input_formats=TIME_INPUT_FORMATS
+                )
+            elif question.type_field == TYPE_FIELD.date_and_time:
+                self.fields[field_name] = forms.DateTimeField(
+                    label=question.label, widget=DateTimeSurvey(),
+                    input_formats=DATETIME_INPUT_FORMATS
                 )
             elif question.type_field == TYPE_FIELD.text_area:
                 self.fields[field_name] = forms.CharField(
@@ -74,6 +90,14 @@ class BaseSurveyForm(forms.Form):
                     label=question.label, widget=RatingSurvey,
                     validators=[MaxLengthValidator(1), validate_rating]
                 )
+            elif question.type_field == TYPE_FIELD.color:
+                self.fields[field_name] = forms.CharField(
+                    label=question.label, widget=ColorSurvey()
+                )
+            elif question.type_field == TYPE_FIELD.json:
+                self.fields[field_name] = JSONFormField(
+                    schema=question.schema, encoder=DjangoJSONEncoder, label=question.label)
+                # self.fields[field_name].widget.attrs.update({"class": "w-full text-sm border-gray-500 rounded-lg shadow-sm"})
             else:
                 self.fields[field_name] = forms.CharField(
                     label=question.label,
@@ -91,10 +115,10 @@ class BaseSurveyForm(forms.Form):
             try:
                 field = cleaned_data[field_name]
             except KeyError:
-                raise forms.ValidationError("You must enter valid data")
+                raise forms.ValidationError(gettext("You must enter valid data."))
 
             if self.fields[field_name].required and not field:
-                self.add_error(field_name, 'This field is required')
+                self.add_error(field_name, gettext("This field is required."))
 
         return cleaned_data
 
@@ -113,6 +137,8 @@ class CreateSurveyForm(BaseSurveyForm):
 
             if question.type_field == TYPE_FIELD.multi_select:
                 value = ",".join(cleaned_data[field_name])
+            elif question.type_field == TYPE_FIELD.json:
+                value = json.dumps(cleaned_data[field_name], cls=DjangoJSONEncoder, indent=2, sort_keys=False)
             else:
                 value = cleaned_data[field_name]
 

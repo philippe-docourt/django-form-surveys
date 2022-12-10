@@ -1,0 +1,5 @@
+<div class="datetimepicker" data-mdb-toggle-button="false">
+    <input type="datetime-local" name="{{ widget.name }}"{% if widget.value != None %}
+           value="{{ widget.value }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}
+           data-mdb-toggle="datetimepicker"/>
+</div>

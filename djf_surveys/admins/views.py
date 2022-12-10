@@ -14,6 +14,7 @@ from django.views.generic import View
 from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
 
+from djf_surveys.admins.forms import QuestionForm
 from djf_surveys.app_settings import SURVEYS_ADMIN_BASE_PATH
 from djf_surveys.models import Survey, Question, UserAnswer
 from djf_surveys.mixin import ContextTitleMixin
@@ -97,9 +98,9 @@ class AdminCreateQuestionView(ContextTitleMixin, CreateView):
     model = Question
     template_name = 'djf_surveys/admins/question_form.html'
     success_url = reverse_lazy("djf_surveys:")
-    fields = ['label', 'key', 'type_field', 'choices', 'help_text', 'required']
     title_page = _("Add Question")
     survey = None
+    form_class = QuestionForm
 
     def dispatch(self, request, *args, **kwargs):
         self.survey = get_object_or_404(Survey, id=kwargs['pk'])
@@ -125,9 +126,9 @@ class AdminUpdateQuestionView(ContextTitleMixin, UpdateView):
     model = Question
     template_name = 'djf_surveys/admins/question_form.html'
     success_url = SURVEYS_ADMIN_BASE_PATH
-    fields = ['label', 'key', 'type_field', 'choices', 'help_text', 'required']
     title_page = _("Add Question")
     survey = None
+    form_class = QuestionForm
 
     def dispatch(self, request, *args, **kwargs):
         question = self.get_object()
@@ -181,24 +182,20 @@ class DownloadResponseSurveyView(DetailView):
         csv_buffer = StringIO()
         writer = csv.writer(csv_buffer)
 
-        rows = []
-        header = []
+        columns = []
+        header = ["user", "update_at"]
         for index, user_answer in enumerate(user_answers):
-            if index == 0:
-                header.append('user')
-                header.append('update_at')
-
-            rows.append(user_answer.user.username if user_answer.user else 'no auth')
-            rows.append(user_answer.updated_at.strftime("%Y-%m-%d %H:%M:%S"))
+            columns.append(user_answer.user.username if user_answer.user else 'no auth')
+            columns.append(user_answer.updated_at.strftime("%Y-%m-%d %H:%M:%S"))
             for answer in user_answer.answer_set.all():
                 if index == 0:
-                    header.append(answer.question.label)
-                rows.append(answer.get_value_for_csv)
+                    header += answer.get_keys_for_csv()
+                columns += answer.get_values_for_csv()
 
             if index == 0:
                 writer.writerow(header)
-            writer.writerow(rows)
-            rows = []
+            writer.writerow(columns)
+            columns = []
 
         response = HttpResponse(csv_buffer.getvalue(), content_type="text/csv")
         response['Content-Disposition'] = f'attachment; filename={survey.slug}.csv'

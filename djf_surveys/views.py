@@ -42,6 +42,7 @@ class SurveyListView(ContextTitleMixin, ListView):
 class SurveyFormView(FormMixin, DetailView):
     template_name = 'djf_surveys/form.html'
     success_url = reverse_lazy("djf_surveys:index")
+    # form_class =
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
