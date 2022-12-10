@@ -1,8 +1,9 @@
 {% extends 'djf_surveys/admins/master.html' %}
 {% load djf_survey_tags i18n static %}
 {% block extra_css %}
-    <link href="{% static '/dist/jsoneditor.min.css' %}" media="all" rel="stylesheet">
-    <script src="{% static '/dist/jsoneditor.min.js' %}"></script>
+    <link href="{% static 'dist/jsoneditor.min.css' %}" media="all" rel="stylesheet">
+    <link href="{% static 'djf_surveys/css/rjf.css' %}" media="all" rel="stylesheet">
+    <script src="{% static 'dist/jsoneditor.min.js' %}"></script>
 {% endblock %}
 
 {% block content %}

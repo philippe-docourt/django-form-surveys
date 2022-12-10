@@ -1,0 +1,7 @@
+.rjf-form-row input, .rjf-form-row select {
+    max-width: 100% !important;
+}
+
+.rjf-form-row-controls + .rjf-form-row-inner {
+  padding-right: 5px !important;
+}
