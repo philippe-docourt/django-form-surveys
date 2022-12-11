@@ -9,5 +9,5 @@ class QuestionForm(ModelForm):
         model = Question
         fields = ['label', 'key', 'type_field', 'choices', 'schema', 'help_text', 'required']
         widgets = {
-            'schema': JSONEditorWidget(width="100%", height="350px")
+            'schema': JSONEditorWidget(width="100%", height="450px")
         }

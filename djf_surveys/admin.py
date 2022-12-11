@@ -4,10 +4,17 @@ from .admins.forms import QuestionForm
 from .models import Survey, Question, Answer, UserAnswer
 
 
+class AdminQuestionForm(QuestionForm):
+    class Meta(QuestionForm.Meta):
+        fields = fields = ['survey', 'label', 'key', 'type_field', 'choices', 'schema', 'help_text', 'required']
+
+
 class AdminQuestion(admin.ModelAdmin):
     list_display = ('survey', 'label', 'type_field', 'help_text', 'required')
     search_fields = ('survey', )
-    form = QuestionForm
+    form = AdminQuestionForm
+    save_as = True
+    save_on_top = True
 
 
 class AdminAnswer(admin.ModelAdmin):
