@@ -8,7 +8,6 @@ from django.core.validators import MaxLengthValidator
 from django.utils.translation import gettext
 
 from django_jsonform.forms.fields import JSONFormField
-from django_jsonform.widgets import JSONFormWidget
 
 from djf_surveys.models import Answer, TYPE_FIELD, UserAnswer, Question
 from djf_surveys.widgets import CheckboxSelectMultipleSurvey, RadioSelectSurvey, DateSurvey, RatingSurvey, TimeSurvey, DateTimeSurvey, ColorSurvey
@@ -18,7 +17,7 @@ from djf_surveys.validators import validate_rating
 
 def make_choices(question: Question) -> List[Tuple[str, str]]:
     choices = []
-    for choice in question.choices.split(','):
+    for choice in question.get_choice_list():
         choice = choice.strip()
         choices.append((choice.replace(' ', '_').lower(), choice))
     return choices
@@ -97,7 +96,6 @@ class BaseSurveyForm(forms.Form):
             elif question.type_field == TYPE_FIELD.json:
                 self.fields[field_name] = JSONFormField(
                     schema=question.schema, encoder=DjangoJSONEncoder, label=question.label)
-                # self.fields[field_name].widget.attrs.update({"class": "w-full text-sm border-gray-500 rounded-lg shadow-sm"})
             else:
                 self.fields[field_name] = forms.CharField(
                     label=question.label,
@@ -136,7 +134,7 @@ class CreateSurveyForm(BaseSurveyForm):
             field_name = f'field_survey_{question.id}'
 
             if question.type_field == TYPE_FIELD.multi_select:
-                value = ",".join(cleaned_data[field_name])
+                value = "\r\n".join(cleaned_data[field_name])
             elif question.type_field == TYPE_FIELD.json:
                 value = json.dumps(cleaned_data[field_name], cls=DjangoJSONEncoder, indent=2, sort_keys=False)
             else:
@@ -161,7 +159,7 @@ class EditSurveyForm(BaseSurveyForm):
         for answer in answers:
             field_name = f'field_survey_{answer.question.id}'
             if answer.question.type_field == TYPE_FIELD.multi_select:
-                self.fields[field_name].initial = answer.value.split(',')
+                self.fields[field_name].initial = answer.get_value_list_for_multiselect()
             else:
                 self.fields[field_name].initial = answer.value
 
@@ -176,7 +174,7 @@ class EditSurveyForm(BaseSurveyForm):
             field_name = f'field_survey_{question.id}'
 
             if question.type_field == TYPE_FIELD.multi_select:
-                value = ",".join(cleaned_data[field_name])
+                value = "\r\n".join(cleaned_data[field_name])
             else:
                 value = cleaned_data[field_name]
 

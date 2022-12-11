@@ -110,7 +110,7 @@ class Question(BaseModel):
     choices = models.TextField(
         _("choices"),
         blank=True, null=True,
-        help_text=_("If type of field is radio, select, or multi select, fill in the options separated by commas. Ex: Male, Female.")
+        help_text=_("If type of field is radio, select, or multi select, fill in the options separated by commas or one item by line (allow usage of coma within proposition). Ex: Male, Female.")
     )
     schema = models.JSONField(
         _("schema"),
@@ -142,6 +142,14 @@ class Question(BaseModel):
             
         super(Question, self).save(*args, **kwargs)
 
+    def get_choice_list(self) -> [str]:
+        # For backward compatibility.
+        if "," in self.choices and "\n" not in self.choices:
+            choice_list = self.choices.split(',')
+        else:
+            choice_list = self.choices.replace('\r\n', '\n').split('\n')
+        return choice_list
+
 
 class UserAnswer(BaseModel):
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE, verbose_name=_("survey"))
@@ -172,7 +180,18 @@ class Answer(BaseModel):
         ordering = ["question__ordering"]
 
     def __str__(self):
-        return f"{self.question}: {self.value}"
+        formated_value = self.value.replace('\r\n', ' | ') if self.question.type_field == TYPE_FIELD.multi_select else self.value
+        return f"{self.question}: {formated_value}"
+
+    def get_value_list_for_multiselect(self) -> [str]:
+        if self.question.type_field == TYPE_FIELD.multi_select:
+            # For backward compatibility.
+            if "," in self.value and "\n" not in self.choices:
+                value_list = self.value.split(',')
+            else:
+                value_list = self.value.replace('\r\n', '\n').split('\n')
+            return value_list
+        raise ValueError("The value does not represent a multi-slection.")
 
     @property
     def get_value(self):
@@ -182,7 +201,7 @@ class Answer(BaseModel):
             return mark_safe(f'<a href="{self.value}" target="_blank">{self.value}</a>')
         elif self.question.type_field == TYPE_FIELD.radio or self.question.type_field == TYPE_FIELD.select or\
                 self.question.type_field == TYPE_FIELD.multi_select:
-            return self.value.strip().replace("_", " ").capitalize()
+            return self.value.strip().replace("\r\n", " | ").replace("_", " ").capitalize()
         else:
             return self.value
 
@@ -215,7 +234,7 @@ class Answer(BaseModel):
 
         if self.question.type_field == TYPE_FIELD.radio or self.question.type_field == TYPE_FIELD.select or\
                 self.question.type_field == TYPE_FIELD.multi_select:
-            values = [self.value.strip().replace("_", " ").capitalize()]
+            values = [self.value.strip().replace("\r\n", " | ").replace("_", " ").capitalize()]
         elif self.question.type_field == TYPE_FIELD.json:
             data = json.loads(self.value)
             values = list(itertools.chain.from_iterable(getvalues(data)))
