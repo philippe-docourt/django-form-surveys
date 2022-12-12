@@ -10,9 +10,12 @@ class AdminQuestionForm(QuestionForm):
 
 
 class AdminQuestion(admin.ModelAdmin):
-    list_display = ('survey', 'label', 'type_field', 'help_text', 'required')
+    list_display = ('survey', 'label', 'type_field', 'required', 'ordering')
+    list_editable = ('label', 'required', 'ordering')
     search_fields = ('survey', )
     form = AdminQuestionForm
+    list_select_related = ['survey']
+    list_filter = ['survey']
     save_as = True
     save_on_top = True
 
@@ -21,6 +24,7 @@ class AdminAnswer(admin.ModelAdmin):
     list_display = ('question', 'get_label', 'value', 'user_answer')
     search_fields = ('question__label', 'value',)
     list_filter = ('question__survey',)
+    list_select_related = ['question']
 
     def get_label(self, obj):
         return obj.question.label
@@ -30,10 +34,12 @@ class AdminAnswer(admin.ModelAdmin):
 
 class AdminUserAnswer(admin.ModelAdmin):
     list_display = ('survey', 'user', 'created_at', 'updated_at')
+    list_select_related = ['survey', 'user']
 
 
 class AdminSurvey(admin.ModelAdmin):
-    list_display = ('name', 'slug')
+    list_display = ('__str__', 'name', 'slug', 'editable', 'deletable', 'duplicate_entry', 'private_response', 'can_anonymous_user')
+    list_editable = ('name', 'slug', 'editable', 'deletable', 'duplicate_entry', 'private_response', 'can_anonymous_user')
     exclude = ['slug']
     save_as = True
     save_on_top = True
