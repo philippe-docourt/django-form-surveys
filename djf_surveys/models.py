@@ -51,7 +51,7 @@ class BaseModel(models.Model):
 
 class Survey(BaseModel):
     name = models.CharField(_("name"), max_length=200)
-    description = models.TextField(_("description"), default='')
+    description = models.TextField(_("description"), max_length=4096, default='')
     slug = models.SlugField(_("slug"), max_length=225, default='')
     editable = models.BooleanField(_("editable"), default=True, help_text=_("If False, user can't edit record."))
     deletable = models.BooleanField(_("deletable"), default=True, help_text=_("If False, user can't delete record."))
@@ -118,9 +118,9 @@ class Question(BaseModel):
         encoder=DjangoJSONEncoder,
         help_text=get_json_schema_help_text
     )
-    help_text = models.CharField(
+    help_text = models.TextField(
         _("help text"),
-        max_length=200, blank=True, null=True,
+        max_length=400, blank=True, null=False, default="",
         help_text=_("You can add a help text in here.")
     )
     required = models.BooleanField(_("required"), default=True, help_text=_("If True, the user must provide an answer to this question."))

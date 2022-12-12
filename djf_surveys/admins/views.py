@@ -1,6 +1,7 @@
 import csv
 from io import StringIO
 
+from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
 from django.utils.translation import gettext, gettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
@@ -79,7 +80,7 @@ class AdminSurveyFormView(ContextTitleMixin, FormMixin, DetailView):
         return self.object.name
 
     def get_sub_title_page(self):
-        return self.object.description
+        return mark_safe(self.object.description)
 
 
 @method_decorator(staff_member_required, name='dispatch')

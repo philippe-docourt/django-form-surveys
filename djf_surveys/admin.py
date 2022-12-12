@@ -35,6 +35,8 @@ class AdminUserAnswer(admin.ModelAdmin):
 class AdminSurvey(admin.ModelAdmin):
     list_display = ('name', 'slug')
     exclude = ['slug']
+    save_as = True
+    save_on_top = True
 
 
 admin.site.register(Survey, AdminSurvey)

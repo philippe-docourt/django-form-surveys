@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy, reverse
+from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
 from django.utils.translation import gettext, gettext_lazy as _
 from django.views.generic.list import ListView
@@ -84,7 +85,7 @@ class CreateSurveyFormView(ContextTitleMixin, SurveyFormView):
         return self.get_object().name
 
     def get_sub_title_page(self):
-        return self.get_object().description
+        return mark_safe(self.get_object().description)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -116,7 +117,7 @@ class EditSurveyFormView(ContextTitleMixin, SurveyFormView):
         return self.get_object().survey.name
 
     def get_sub_title_page(self):
-        return self.get_object().survey.description
+        return mark_safe(self.get_object().survey.description)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -188,7 +189,7 @@ class DetailResultSurveyView(ContextTitleMixin, DetailView):
         return self.get_object().survey.name
 
     def get_sub_title_page(self):
-        return self.get_object().survey.description
+        return mark_safe(self.get_object().survey.description)
 
 
 def share_link(request, slug):

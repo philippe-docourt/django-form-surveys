@@ -1,3 +1,4 @@
+from django.utils.safestring import mark_safe
 from django.views.generic.base import ContextMixin
 
 
@@ -16,5 +17,5 @@ class ContextTitleMixin(ContextMixin):
         if 'form' not in kwargs:
             kwargs['title'] = self.get_title_page()
             kwargs['title_page'] = self.get_title_page()
-            kwargs['sub_title_page'] = self.get_sub_title_page()
+            kwargs['sub_title_page'] = mark_safe(self.get_sub_title_page())
         return super().get_context_data(**kwargs)
