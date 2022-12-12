@@ -10,7 +10,7 @@ from django.utils.translation import gettext
 from django_jsonform.forms.fields import JSONFormField
 
 from djf_surveys.models import Answer, TYPE_FIELD, UserAnswer, Question
-from djf_surveys.widgets import CheckboxSelectMultipleSurvey, RadioSelectSurvey, DateSurvey, RatingSurvey, TimeSurvey, DateTimeSurvey, ColorSurvey
+from djf_surveys.widgets import CheckboxSelectMultipleSurvey, RadioSelectSurvey, DateSurvey, RatingSurvey, TimeSurvey, DateTimeSurvey, ColorSurvey, SurveyJSONFormWidget
 from djf_surveys.app_settings import DATE_INPUT_FORMATS, SURVEY_FIELD_VALIDATORS, TIME_INPUT_FORMATS, DATETIME_INPUT_FORMATS
 from djf_surveys.validators import validate_rating
 
@@ -95,7 +95,7 @@ class BaseSurveyForm(forms.Form):
                 )
             elif question.type_field == TYPE_FIELD.json:
                 self.fields[field_name] = JSONFormField(
-                    schema=question.schema, encoder=DjangoJSONEncoder, label=question.label)
+                    schema=question.schema, encoder=DjangoJSONEncoder, label=question.label, widget=SurveyJSONFormWidget(schema=question.schema))
             else:
                 self.fields[field_name] = forms.CharField(
                     label=question.label,

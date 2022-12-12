@@ -1,17 +1,18 @@
 .rjf-form-row input, .rjf-form-row select {
-    max-width: 100% !important;
+    max-width: 100%;
 }
 
 .rjf-form-row-controls + .rjf-form-row-inner {
-  padding-right: 5px !important;
+  padding-right: 5px;
 }
 
 .rjf-form-row label + .rjf-input-group {
-    width: 100% !important;
-    display: block !important;
+    width: 100%;
+    display: block;
 }
 
 .rjf-form-row label input[type="checkbox"] {
-    width: 1em !important;
+    width: 1em;
 }
+
 

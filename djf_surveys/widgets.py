@@ -1,4 +1,5 @@
 from django import forms
+from django_jsonform.widgets import JSONFormWidget
 
 
 class CheckboxSelectMultipleSurvey(forms.CheckboxSelectMultiple):
@@ -31,3 +32,19 @@ class ColorSurvey(forms.HiddenInput):
 
 class ColorSurvey(forms.HiddenInput):
     template_name = 'djf_surveys/widgets/colorpicker.html'
+
+
+class SurveyJSONFormWidget(JSONFormWidget):
+    template_name = 'django_jsonform/editor.html'
+
+    @property
+    def media(self):
+        css = {
+            'all': [
+                'djf_surveys/css/rjf.css',
+            ]
+        }
+        all_media = super().media
+        override_media = forms.Media(css=css)
+        all_media += override_media
+        return all_media
