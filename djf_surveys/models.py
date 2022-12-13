@@ -225,19 +225,21 @@ class Answer(BaseModel):
     def get_values_for_csv(self):
         def getvalues(obj):
             for v in obj.values():
-                if not v: continue
+                if v is None:
+                    continue
                 if isinstance(v, dict):
                     for c in getvalues(v):
                         yield c
                 else:  # leaf
-                    yield v if isinstance(v, list) else [v]
+                    yield [" | ".join(v)] if isinstance(v, list) else [v]
 
         if self.question.type_field == TYPE_FIELD.radio or self.question.type_field == TYPE_FIELD.select or\
                 self.question.type_field == TYPE_FIELD.multi_select:
             values = [self.value.strip().replace("\r\n", " | ").replace("_", " ").capitalize()]
         elif self.question.type_field == TYPE_FIELD.json:
             data = json.loads(self.value)
-            values = list(itertools.chain.from_iterable(getvalues(data)))
+            values_it = list(getvalues(data))
+            values = list(itertools.chain.from_iterable(values_it))
         else:
             values = [self.value.strip()]
         return values

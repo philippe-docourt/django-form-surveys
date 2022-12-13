@@ -95,7 +95,7 @@ class BaseSurveyForm(forms.Form):
                 )
             elif question.type_field == TYPE_FIELD.json:
                 self.fields[field_name] = JSONFormField(
-                    schema=question.schema, encoder=DjangoJSONEncoder, label=question.label, widget=SurveyJSONFormWidget(schema=question.schema))
+                    schema=question.schema, encoder=DjangoJSONEncoder, label=question.label, widget=SurveyJSONFormWidget(schema=question.schema, validate_on_submit=True))
             else:
                 self.fields[field_name] = forms.CharField(
                     label=question.label,
@@ -175,6 +175,8 @@ class EditSurveyForm(BaseSurveyForm):
 
             if question.type_field == TYPE_FIELD.multi_select:
                 value = "\r\n".join(cleaned_data[field_name])
+            elif question.type_field == TYPE_FIELD.json:
+                value = json.dumps(cleaned_data[field_name], cls=DjangoJSONEncoder, indent=2, sort_keys=False)
             else:
                 value = cleaned_data[field_name]
 
