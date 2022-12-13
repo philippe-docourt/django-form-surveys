@@ -6,6 +6,7 @@ from collections import namedtuple
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.utils.html import escape
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _, gettext
@@ -194,14 +195,18 @@ class Answer(BaseModel):
         raise ValueError("The value does not represent a multi-slection.")
 
     @property
-    def get_value(self):
+    def value_for_display(self):
         if self.question.type_field == TYPE_FIELD.rating:
             return create_star(active_star=int(self.value))
         elif self.question.type_field == TYPE_FIELD.url:
             return mark_safe(f'<a href="{self.value}" target="_blank">{self.value}</a>')
+        elif self.question.type_field == TYPE_FIELD.email:
+            return mark_safe(f'<a href="mailto:{self.value}">{self.value}</a>')
         elif self.question.type_field == TYPE_FIELD.radio or self.question.type_field == TYPE_FIELD.select or\
                 self.question.type_field == TYPE_FIELD.multi_select:
             return self.value.strip().replace("\r\n", " | ").replace("_", " ").capitalize()
+        elif self.question.type_field == TYPE_FIELD.json:
+            return escape(self.value)
         else:
             return self.value
 

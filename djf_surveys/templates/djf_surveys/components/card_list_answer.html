@@ -40,7 +40,13 @@
 
         {% for answer in object.answer_set.all %}
             <p class="text-lg text-neutral-900">{{ answer.question.label }}</p>
-            <p class="text-slate-400">{{ answer.get_value }}</p>
+            {% if answer.question.type_field == 13 %}
+                <pre class="text-slate-400" style="overflow-x: scroll">
+{{ answer.value_for_display }}
+                </pre>
+            {% else %}
+                <p class="text-slate-400">{{ answer.value_for_display }}</p>
+            {% endif %}
             <hr class="mt-3 mb-3">
         {% endfor %}
 
