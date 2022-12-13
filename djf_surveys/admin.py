@@ -12,7 +12,7 @@ class AdminQuestionForm(QuestionForm):
 class AdminQuestion(admin.ModelAdmin):
     list_display = ('survey', 'label', 'type_field', 'required', 'ordering')
     list_editable = ('label', 'required', 'ordering')
-    search_fields = ('survey', )
+    search_fields = ('survey__name', 'label')
     form = AdminQuestionForm
     list_select_related = ['survey']
     list_filter = ['survey']
