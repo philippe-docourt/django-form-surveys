@@ -42,7 +42,7 @@
 
         <div class="mt-4 sm:pr-8">
             <p class="text-sm text-gray-500">
-                {{ survey.description|safe }}
+                {{ survey.description|safe|truncatewords_html:"30" }}
             </p>
         </div>
     </a>
