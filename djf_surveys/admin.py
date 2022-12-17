@@ -34,6 +34,7 @@ class AdminAnswer(admin.ModelAdmin):
 
 class AdminUserAnswer(admin.ModelAdmin):
     list_display = ('survey', 'user', 'created_at', 'updated_at')
+    list_filter = ('survey',)
     list_select_related = ['survey', 'user']
 
 
