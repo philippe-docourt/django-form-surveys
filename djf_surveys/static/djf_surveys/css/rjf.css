@@ -2,6 +2,10 @@
   max-width: 100%;
 }
 
+.rjf-multiselect-field-options-container {
+    width: 100%;
+}
+
 .rjf-form-row input, .rjf-form-row select {
     max-width: 100%;
 }
