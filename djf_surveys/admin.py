@@ -41,6 +41,7 @@ class AdminUserAnswer(admin.ModelAdmin):
 class AdminSurvey(admin.ModelAdmin):
     list_display = ('__str__', 'name', 'slug', 'editable', 'deletable', 'duplicate_entry', 'private_response', 'can_anonymous_user')
     list_editable = ('name', 'slug', 'editable', 'deletable', 'duplicate_entry', 'private_response', 'can_anonymous_user')
+    search_fields = ('name',)
     exclude = ['slug']
     save_as = True
     save_on_top = True
