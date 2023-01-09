@@ -27,7 +27,7 @@ class BaseSurveyForm(forms.Form):
 
     def __init__(self, survey, user, *args, **kwargs):
         self.survey = survey
-        self.user = user if user.is_authenticated else None
+        self.user = user if user and user.is_authenticated else None
         self.field_names = []
         self.questions = self.survey.questions.all().order_by('ordering')
         super().__init__(*args, **kwargs)

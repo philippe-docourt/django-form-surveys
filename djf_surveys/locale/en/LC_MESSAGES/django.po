@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-04 00:31+0700\n"
+"POT-Creation-Date: 2023-01-10 04:29+0700\n"
 "PO-Revision-Date: 2022-11-06 19:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -53,132 +53,111 @@ msgstr "Update ordering of questions succeeded."
 msgid "Summary"
 msgstr "Summary"
 
-#: models.py:50
+#: models.py:49
 msgid "name"
 msgstr "name"
 
-#: models.py:51
+#: models.py:50
 msgid "description"
 msgstr "description"
 
-#: models.py:52
+#: models.py:51
 msgid "slug"
 msgstr "slug"
 
-#: models.py:53
+#: models.py:52
 msgid "editable"
 msgstr "editable"
 
-#: models.py:53
+#: models.py:52
 msgid "If False, user can't edit record."
 msgstr "If False, user can't edit record."
 
-#: models.py:54
+#: models.py:53
 msgid "deletable"
 msgstr "deletable"
 
-#: models.py:54
+#: models.py:53
 msgid "If False, user can't delete record."
 msgstr "If False, user can't delete record."
 
-#: models.py:55
+#: models.py:54
 msgid "mutiple submissions"
 msgstr "mutiple submissions"
 
-#: models.py:55
+#: models.py:54
 msgid "If True, user can resubmit."
 msgstr "If True, user can resubmit."
 
-#: models.py:56
+#: models.py:55
 msgid "private response"
 msgstr "private response"
 
-#: models.py:56
+#: models.py:55
 msgid "If True, only admin and owner can access."
 msgstr "If True, only admin and owner can access."
 
-#: models.py:57
+#: models.py:56
 msgid "anonymous submission"
 msgstr "anonymous submission"
 
-#: models.py:57
+#: models.py:56
 msgid "If True, user without authentatication can submit."
 msgstr "If True, user without authentatication can submit."
 
-#: models.py:60 models.py:74 models.py:103 models.py:142
+#: models.py:59 models.py:73 models.py:93 models.py:127
 msgid "survey"
 msgstr "survey"
 
-#: models.py:61 models.py:75
+#: models.py:60 models.py:74
 msgid "surveys"
 msgstr "surveys"
 
-#: models.py:80
-#, python-format
-msgid "If type of field is JSON, fill in the JSON schema (see %(doc_url)s)."
-msgstr ""
-
-#: models.py:85
+#: models.py:79
 msgid "Text"
 msgstr "Text"
 
-#: models.py:86
+#: models.py:80
 msgid "Number"
 msgstr "Number"
 
-#: models.py:87
+#: models.py:81
 msgid "Radio"
 msgstr "Radio"
 
-#: models.py:88
+#: models.py:82
 msgid "Select"
 msgstr "Select"
 
-#: models.py:89
+#: models.py:83
 msgid "Multi Select"
 msgstr "Multi Select"
 
-#: models.py:90
+#: models.py:84
 msgid "Text Area"
 msgstr "Text Area"
 
-#: models.py:91
+#: models.py:85
 msgid "URL"
 msgstr "URL"
 
-#: models.py:92
+#: models.py:86
 msgid "Email"
 msgstr "Email"
 
-#: models.py:93
+#: models.py:87
 msgid "Date"
 msgstr "Date"
 
-#: models.py:94
-msgid "Time"
-msgstr ""
-
-#: models.py:95
-msgid "Date and time"
-msgstr ""
-
-#: models.py:96
+#: models.py:88
 msgid "Rating"
 msgstr "Rating"
 
-#: models.py:97
-msgid "Color"
-msgstr ""
-
-#: models.py:98
-msgid "JSON"
-msgstr ""
-
-#: models.py:101
+#: models.py:91
 msgid "key"
 msgstr "key"
 
-#: models.py:102
+#: models.py:92
 msgid ""
 "Unique key for this question, fill in the blank if you want to use for "
 "automatic generation."
@@ -186,23 +165,23 @@ msgstr ""
 "Unique key for this question, fill in the blank if you want to use for "
 "automatic generation."
 
-#: models.py:104
+#: models.py:94
 msgid "label"
 msgstr "label"
 
-#: models.py:104
+#: models.py:94
 msgid "Enter your question in here."
 msgstr "Enter your question in here."
 
-#: models.py:105
+#: models.py:95
 msgid "type of input field"
 msgstr "type of input field"
 
-#: models.py:107
+#: models.py:97 models.py:107
 msgid "choices"
 msgstr "choices"
 
-#: models.py:109
+#: models.py:99
 msgid ""
 "If type of field is radio, select, or multi select, fill in the options "
 "separated by commas. Ex: Male, Female."
@@ -210,67 +189,59 @@ msgstr ""
 "If type of field is radio, select, or multi select, fill in the options "
 "separated by commas. Ex: Male, Female."
 
-#: models.py:112
-msgid "schema"
-msgstr ""
-
-#: models.py:117
+#: models.py:102
 msgid "help text"
 msgstr "help text"
 
-#: models.py:119
+#: models.py:104
 msgid "You can add a help text in here."
 msgstr "You can add a help text in here."
 
-#: models.py:121
+#: models.py:106
 msgid "required"
 msgstr "required"
 
-#: models.py:121
+#: models.py:106
 msgid "If True, the user must provide an answer to this question."
 msgstr "If True, the user must provide an answer to this question."
 
-#: models.py:122
-msgid "ordering"
-msgstr ""
-
-#: models.py:122
+#: models.py:107
 msgid "Defines the question order within the surveys."
 msgstr "Defines the question order within the surveys."
 
-#: models.py:125 models.py:160
+#: models.py:110 models.py:145
 msgid "question"
 msgstr "question"
 
-#: models.py:126
+#: models.py:111
 msgid "questions"
 msgstr "questions"
 
-#: models.py:143
+#: models.py:128
 msgid "user"
 msgstr "user"
 
-#: models.py:146 models.py:162
+#: models.py:131 models.py:147
 msgid "user answer"
 msgstr "user answer"
 
-#: models.py:147
+#: models.py:132
 msgid "user answers"
 msgstr "user answers"
 
-#: models.py:161
+#: models.py:146
 msgid "value"
 msgstr "value"
 
-#: models.py:161
+#: models.py:146
 msgid "The value of the answer given by the user."
 msgstr "The value of the answer given by the user."
 
-#: models.py:165
+#: models.py:150
 msgid "answer"
 msgstr "answer"
 
-#: models.py:166
+#: models.py:151
 msgid "answers"
 msgstr "answers"
 
@@ -294,6 +265,22 @@ msgstr "Create a survey"
 #: templates/djf_surveys/answer_list.html:14
 msgid "Result"
 msgstr "Result"
+
+#: templates/djf_surveys/components/alert.html:33
+msgid "Success"
+msgstr ""
+
+#: templates/djf_surveys/components/alert.html:35
+msgid "Warning"
+msgstr ""
+
+#: templates/djf_surveys/components/alert.html:37
+msgid "Info"
+msgstr ""
+
+#: templates/djf_surveys/components/alert.html:39
+msgid "Error"
+msgstr ""
 
 #: templates/djf_surveys/components/empty_state.html:4
 msgid "There's nothing here..."
