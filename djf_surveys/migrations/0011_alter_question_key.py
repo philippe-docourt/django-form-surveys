@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("djf_surveys", "0010_model_translation"),
+        ("djf_surveys", "0011_question_schema_alter_question_choices_and_more"),
     ]
 
     operations = [

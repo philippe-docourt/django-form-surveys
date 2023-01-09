@@ -8,7 +8,7 @@ import djf_surveys.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("djf_surveys", "0011_alter_question_key"),
+        ("djf_surveys", "0010_model_translation"),
     ]
 
     operations = [
