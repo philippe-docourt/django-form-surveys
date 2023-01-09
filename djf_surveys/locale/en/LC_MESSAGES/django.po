@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 01:06+0700\n"
+"POT-Creation-Date: 2023-01-10 04:29+0700\n"
 "PO-Revision-Date: 2022-11-06 19:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,38 +18,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: admins/views.py:32
+#: admins/views.py:33
 msgid "Add New Survey"
 msgstr "Add New Survey"
 
-#: admins/views.py:39 admins/views.py:113 views.py:50
+#: admins/views.py:40 admins/views.py:114 views.py:51
 #, python-format
 msgid "%(page_action_name)s succeeded."
 msgstr "%(page_action_name)s succeeded."
 
-#: admins/views.py:53
+#: admins/views.py:54
 msgid "Edit Survey"
 msgstr "Edit Survey"
 
-#: admins/views.py:90
+#: admins/views.py:91
 #, python-format
 msgid "Survey %(name)s succesfully deleted."
 msgstr "Survey %(name)s succesfully deleted."
 
-#: admins/views.py:100 admins/views.py:128
+#: admins/views.py:101 admins/views.py:129
 msgid "Add Question"
 msgstr "Add Question"
 
-#: admins/views.py:153
+#: admins/views.py:154
 #, python-format
 msgid "Question %(name)s succesfully deleted."
 msgstr "Question %(name)s succesfully deleted."
 
-#: admins/views.py:168
+#: admins/views.py:169
 msgid "Update ordering of questions succeeded."
 msgstr "Update ordering of questions succeeded."
 
-#: admins/views.py:211 templates/djf_surveys/admins/summary.html:34
+#: admins/views.py:212 templates/djf_surveys/admins/summary.html:16
 msgid "Summary"
 msgstr "Summary"
 
@@ -246,7 +246,6 @@ msgid "answers"
 msgstr "answers"
 
 #: summary.py:243
-#| msgid "Summary"
 msgid "No summary"
 msgstr "No summary"
 
@@ -255,7 +254,7 @@ msgstr "No summary"
 msgid "Summary is available only for input type: %(input_types)s"
 msgstr "Summary is available only for input type: %(input_types)s"
 
-#: templates/djf_surveys/admins/form.html:31 templates/djf_surveys/form.html:56
+#: templates/djf_surveys/admins/form.html:31 templates/djf_surveys/form.html:38
 msgid "Submit"
 msgstr "Submit"
 
@@ -263,9 +262,25 @@ msgstr "Submit"
 msgid "Create a survey"
 msgstr "Create a survey"
 
-#: templates/djf_surveys/answer_list.html:32
+#: templates/djf_surveys/answer_list.html:14
 msgid "Result"
 msgstr "Result"
+
+#: templates/djf_surveys/components/alert.html:33
+msgid "Success"
+msgstr ""
+
+#: templates/djf_surveys/components/alert.html:35
+msgid "Warning"
+msgstr ""
+
+#: templates/djf_surveys/components/alert.html:37
+msgid "Info"
+msgstr ""
+
+#: templates/djf_surveys/components/alert.html:39
+msgid "Error"
+msgstr ""
 
 #: templates/djf_surveys/components/empty_state.html:4
 msgid "There's nothing here..."
@@ -333,38 +348,38 @@ msgstr "Value cannot be greater than 5."
 msgid "Value cannot be less than 1."
 msgstr "Value cannot be less than 1."
 
-#: views.py:53
+#: views.py:54
 msgid "Something went wrong."
 msgstr "Something went wrong."
 
-#: views.py:61
+#: views.py:62
 msgid "Add Survey"
 msgstr "Add Survey"
 
-#: views.py:67
+#: views.py:68
 msgid "Sorry, you must be logged in to fill out the survey."
 msgstr "Sorry, you must be logged in to fill out the survey."
 
-#: views.py:73
+#: views.py:74
 msgid "You have submitted out this survey."
 msgstr "You have submitted out this survey."
 
-#: views.py:104
+#: views.py:105
 msgid "You can't edit this survey. You don't have permission."
 msgstr "You can't edit this survey. You don't have permission."
 
-#: views.py:129
+#: views.py:130
 msgid "You can't delete this survey. You don't have permission."
 msgstr "You can't delete this survey. You don't have permission."
 
-#: views.py:136
+#: views.py:137
 msgid "Answer succesfully deleted."
 msgstr "Answer succesfully deleted."
 
-#: views.py:149 views.py:182
+#: views.py:150 views.py:183
 msgid "You can't access this page. You don't have permission."
 msgstr "You can't access this page. You don't have permission."
 
-#: views.py:168
+#: views.py:169
 msgid "Survey Result"
 msgstr "Survey Result"

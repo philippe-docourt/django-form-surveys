@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 01:06+0700\n"
-"PO-Revision-Date: 2022-11-06 19:06+0100\n"
+"POT-Creation-Date: 2023-01-10 04:29+0700\n"
+"PO-Revision-Date: 2023-01-09 22:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,38 +18,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: admins/views.py:32
+#: admins/views.py:33
 msgid "Add New Survey"
 msgstr "Ajouter un nouveau sondage"
 
-#: admins/views.py:39 admins/views.py:113 views.py:50
+#: admins/views.py:40 admins/views.py:114 views.py:51
 #, python-format
 msgid "%(page_action_name)s succeeded."
 msgstr "%(page_action_name)s réussi."
 
-#: admins/views.py:53
+#: admins/views.py:54
 msgid "Edit Survey"
 msgstr "Modifier sondage"
 
-#: admins/views.py:90
+#: admins/views.py:91
 #, python-format
 msgid "Survey %(name)s succesfully deleted."
 msgstr "Sondage %(name)s supprimé avec succès."
 
-#: admins/views.py:100 admins/views.py:128
+#: admins/views.py:101 admins/views.py:129
 msgid "Add Question"
 msgstr "Ajouter question"
 
-#: admins/views.py:153
+#: admins/views.py:154
 #, python-format
 msgid "Question %(name)s succesfully deleted."
 msgstr "Question %(name)s supprimée avec succès."
 
-#: admins/views.py:168
+#: admins/views.py:169
 msgid "Update ordering of questions succeeded."
 msgstr "Mise à jour de l'ordre des questions réussie."
 
-#: admins/views.py:211 templates/djf_surveys/admins/summary.html:34
+#: admins/views.py:212 templates/djf_surveys/admins/summary.html:16
 msgid "Summary"
 msgstr "Résumé"
 
@@ -255,7 +255,7 @@ msgid "Summary is available only for input type: %(input_types)s"
 msgstr ""
 "Le résumé n'est disponible que pour les types de saisie : %(input_types)s"
 
-#: templates/djf_surveys/admins/form.html:31 templates/djf_surveys/form.html:56
+#: templates/djf_surveys/admins/form.html:31 templates/djf_surveys/form.html:38
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -263,9 +263,25 @@ msgstr "Soumettre"
 msgid "Create a survey"
 msgstr "Créer un sondage"
 
-#: templates/djf_surveys/answer_list.html:32
+#: templates/djf_surveys/answer_list.html:14
 msgid "Result"
 msgstr "Résultat"
+
+#: templates/djf_surveys/components/alert.html:33
+msgid "Success"
+msgstr "Succès"
+
+#: templates/djf_surveys/components/alert.html:35
+msgid "Warning"
+msgstr "Avertissment"
+
+#: templates/djf_surveys/components/alert.html:37
+msgid "Info"
+msgstr "Information"
+
+#: templates/djf_surveys/components/alert.html:39
+msgid "Error"
+msgstr "Erreur"
 
 #: templates/djf_surveys/components/empty_state.html:4
 msgid "There's nothing here..."
@@ -333,40 +349,40 @@ msgstr "La valeur ne peut pas être plus grande que 5."
 msgid "Value cannot be less than 1."
 msgstr "La valeur ne peut pas être inférieure à 1."
 
-#: views.py:53
+#: views.py:54
 msgid "Something went wrong."
 msgstr "Quelque chose n'a pas fonctionné."
 
-#: views.py:61
+#: views.py:62
 msgid "Add Survey"
 msgstr "Ajouter un sondage"
 
-#: views.py:67
+#: views.py:68
 msgid "Sorry, you must be logged in to fill out the survey."
 msgstr "Désolé, vous devez être connecté pour remplir le sondage."
 
-#: views.py:73
+#: views.py:74
 msgid "You have submitted out this survey."
 msgstr "Vous avez soumis le sondage."
 
-#: views.py:104
+#: views.py:105
 msgid "You can't edit this survey. You don't have permission."
 msgstr "Vous ne pouvez pas modifier ce sondage. Vous n'avez pas la permission."
 
-#: views.py:129
+#: views.py:130
 msgid "You can't delete this survey. You don't have permission."
 msgstr ""
 "Vous ne pouvez pas supprimer ce sondage. Vous n'avez pas la permission."
 
-#: views.py:136
+#: views.py:137
 msgid "Answer succesfully deleted."
 msgstr "Réponse supprimée avec succès."
 
-#: views.py:149 views.py:182
+#: views.py:150 views.py:183
 msgid "You can't access this page. You don't have permission."
 msgstr ""
 "Vous ne pouvez pas accéder à cette page. Vous n'avez pas la permission."
 
-#: views.py:168
+#: views.py:169
 msgid "Survey Result"
 msgstr "Résultat du sondage"
