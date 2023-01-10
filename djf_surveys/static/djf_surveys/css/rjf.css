@@ -26,3 +26,7 @@
 .rjf-error-text {
     color: #f87171;
 }
+
+#alert-message {
+    z-index: 100;
+}
