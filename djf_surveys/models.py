@@ -162,7 +162,7 @@ class UserAnswer(BaseModel):
         ordering = ["-updated_at"]
 
     def __str__(self):
-        return str(self.id)
+        return f"{self.survey.name} - {self.id}"
 
     def get_user_photo(self):
         if app_settings.SURVEY_USER_PHOTO_PROFILE:
