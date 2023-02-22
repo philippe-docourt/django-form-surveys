@@ -230,8 +230,6 @@ class Answer(BaseModel):
     def get_values_for_csv(self):
         def getvalues(obj):
             for v in obj.values():
-                if v is None:
-                    continue
                 if isinstance(v, dict):
                     for c in getvalues(v):
                         yield c
